@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./Asset/images/mascotte_PARIS2024.png') no-repeat center center;
+            background-size: cover;
+        }
+        .welcome-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .welcome-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body >
+    <div class="background"></div>
+    <div>
+        <button class="welcome-button">Bienvenue sur le site officiel des jeux olympiques de Paris 2024</button>
+    </div>
+</body>
+</html>
