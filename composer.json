@@ -1,0 +1,15 @@
+{
+    "name": "ndela/bachelor",
+    "autoload": {
+        "psr-4": {
+            "Ndela\\Bachelor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dnico13",
+            "email": "Dnico13@hotmail.com"
+        }
+    ],
+    "require": {}
+}
