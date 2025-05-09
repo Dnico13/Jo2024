@@ -72,3 +72,49 @@ function validateVerificationCode(code) {
     })
     .catch(error => console.error("Erreur :", error));
 }
+
+
+/* Partie inscription d'un nouvel utilisateur */
+
+document.getElementById("formInscription").addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+    // Générer une clé aléatoire à 6 chiffres
+    let clefAleatoire = Math.floor(100000 + Math.random() * 900000);
+
+     // Mise à jour du champ caché dans le formulaire
+    document.getElementById("clef1").value = clefAleatoire;
+
+    // Récupération des données du formulaire
+    let formData = {
+        prenom2: document.getElementById("prenom2").value.trim(),
+        nom2: document.getElementById("nom2").value.trim(),
+        email2: document.getElementById("email2").value.trim(),
+        password2: document.getElementById("password2").value.trim(),
+        clef1: document.getElementById("clef1").value, // Récupération de la clé depuis l'input caché
+        roles: document.getElementById("roles").value
+    };
+
+    
+    // Envoi des données au serveur
+    fetch("/backend/api/Inscription.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+          
+        if (data.success) {
+            alert("Inscription réussie ! Clé générée : " + clefAleatoire);
+        } else {
+            alert("Erreur : " + data.message);
+        }
+    })
+    .catch(error => {
+        
+        alert("Une erreur est survenue, veuillez réessayer.");
+    });
+});
