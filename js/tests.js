@@ -93,4 +93,3 @@ function additionner() {
   document.getElementById("TVA").textContent = tva.toFixed(2);
   document.getElementById("TTC").textContent = totalTTC.toFixed(2);
 }
-

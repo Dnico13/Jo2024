@@ -1,0 +1,74 @@
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-12">
+      <div class="h3 text-center mb-3 text-primary">Votre panier d'achat</div>
+      <table class="table table-primary table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Article</th>
+            <th scope="col">Taille</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Quantité</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>T-shirt</td>
+            <td>
+              <select>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            </td>
+            <td>20.80</td>
+            <td><input id="Tshirt" type="number" min="0" max="10" /></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Casquette</td>
+            <td>
+              <select>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            </td>
+            <td>18.40</td>
+            <td><input id="casquette" type="number" min="0" max="10" /></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Briquet</td>
+            <td></td>
+            <td>6.20</td>
+            <td><input id="briquet" type="number" min="0" max="10" /></td>
+          </tr>
+          <tr>
+            <td colspan="4">Total HT</td>
+            <td id="HT"></td>
+          </tr>
+          <tr>
+            <td colspan="4">TVA: 20 %</td>
+            <td id="TVA"></td>
+          </tr>
+          <tr>
+            <td colspan="4">Total TTC:</td>
+            <td id="TTC"></td>
+          </tr>
+          <tr>
+            <td colspan="5" class="text-center">
+              <button onclick="additionner()" class="btn btn-primary">
+                Calculer le montant de la commande
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

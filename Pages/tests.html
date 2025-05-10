@@ -20,3 +20,55 @@
   </div>
 
 </section>
+ <!-- Integration du panier en attente d une integration a droite des offres -->
+
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-12">
+        <div class="h3 text-center mb-3 text-primary">Votre panier d'achat</div>
+        <table class="table table-primary table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Formule</th>
+              <th scope="col">Prix</th>
+              <th></th>
+              <th scope="col">Quantité</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr class="insertion">
+
+            </tr>
+            <tr>
+              <td colspan="4" class="text-center">Total HT</td>
+              <td id="HT"></td>
+            </tr>
+            <tr>
+              <td colspan="4" class="text-center">TVA: 20 %</td>
+              <td id="TVA"></td>
+            </tr>
+            <tr>
+              <td colspan="4" class="text-center">Total TTC:</td>
+              <td id="TTC"></td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center">
+                <button onclick="additionner()" class="btn btn-primary">
+                  Calculer le montant de la commande
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center">
+                <button  class="btn btn-success">
+                  Validez et payez vos achats
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
