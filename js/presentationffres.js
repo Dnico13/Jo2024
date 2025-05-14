@@ -61,6 +61,9 @@ function ajouterAuPanier(offre) {
 
   if (!existant) {
     const row = document.createElement("tr");
+
+    row.dataset.id = offre.id; 
+
     row.innerHTML = `
       <td></td>
       <td>${offre.nom}</td>
@@ -94,3 +97,48 @@ function additionner() {
   document.getElementById("TTC").textContent = totalTTC.toFixed(2);
 }
 
+/* ---- Fonction pour recuperer le panier cree et l envoyer pour la page recap---- */
+
+function sauvegarderEtRediriger() {
+    // Récupérer les produits du tableau
+    const panier = [];
+
+    document.querySelectorAll("tbody tr:not(:nth-last-child(-n+4))").forEach(row => {
+        const cellules = row.querySelectorAll("td");
+        if (cellules.length < 5) return; 
+
+        const quantiteInput = cellules[4].querySelector("input"); // Sélectionner l'input dans la cellule
+        const quantite = quantiteInput ? parseInt(quantiteInput.value) : 0; // ternaire 
+
+        // Vérifier si le produit a une quantité valide
+        if (quantite > 0) {
+            const produit = {
+                id: row.dataset.id,
+                formule: cellules[1].textContent.trim(),
+                prix: parseFloat(cellules[2].textContent),
+                quantite: quantite
+            };
+            panier.push(produit);
+        }
+    });
+
+    // Vérifier si le panier contient des éléments
+    if (panier.length === 0) {
+        alert("Votre panier est vide !");
+        return;
+    }
+
+    // recuperation des montants 
+    const totalHT = parseFloat(document.getElementById("HT").textContent);
+    const tva = parseFloat(document.getElementById("TVA").textContent);
+    const totalTTC = parseFloat(document.getElementById("TTC").textContent);
+
+
+    // Sauvegarde du panier dans localStorage
+    localStorage.setItem("panier", JSON.stringify(panier));
+    // Ajout des montants dans localStorage
+    localStorage.setItem("montants", JSON.stringify({ HT: totalHT, TVA: tva, TTC: totalTTC }));
+
+    // Redirection après stockage
+    window.location.href = "/recapitulatifCommande";
+}

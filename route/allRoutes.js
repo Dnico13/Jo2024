@@ -8,6 +8,7 @@ export const allRoutes = [
     new Route("/presentationOffres", "Presentation des Offres", "Pages/presentationOffres.html", "js/presentationffres.js"),
     new Route("/login", "Page de Login", "Pages/login.html", "js/login.js"),
     new Route("/panier", "Visualiser son panier", "Pages/panier.html", "js/panier.js"),
+    new Route("/recapitulatifCommande", "Voici le recapitulatif de votre commande", "Pages/recapitulatif.html", "js/recapitulatif.js"),
     new Route("/tests", "tests sur affichage offres", "Pages/tests.html", "js/tests.js"),
    
     

@@ -1,33 +1,23 @@
-<section class="mb-5">
-  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-4 fw-normal text-body-emphasis">Réservez-vos billets</h1>
-    <p class="fs-5 text-body-secondary">
-      Réservez vos billets pour les Jeux Olympiques de Paris 2024. Vivez
-      l’énergie et la magie des Jeux Olympiques en choisissant l’offre qui vous
-      convient : solo, duo ou famille. Ne manquez pas l’occasion d’assister à
-      des moments inoubliables dans l’une des plus grandes célébrations
-      sportives au monde. Préparez-vous à vibrer, réserver votre place dès
-      maintenant !
-    </p>
+<section class="py-1 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">
+        Recapitulatif de votre commande
+      </h1>
+      <p class="lead text-body-secondary">
+        Voici un récapitulatif détaillé de votre commande. Vérifiez les informations et assurez-vous que tout est conforme à vos attentes avant de finaliser votre achat. Merci pour votre confiance !
+      </p>
+    </div>
   </div>
 </section>
 
 <section>
-
-  <div
-    class="row row-cols-1 row-cols-md-3 mb-3 text-center"
-    id="offres-container">
-  </div>
-
-</section>
- <!-- Integration du panier en attente d une integration a droite des offres -->
-
-  <div class="container col-xxl-8 px-4 py-5">
+  <div class="container col-xxl-8 px-auto ">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-12">
         <div class="h3 text-center mb-3 text-primary">Votre panier d'achat</div>
         <table class="table table-primary table-striped">
-          <thead>
+          <thead class="tableau">
             <tr>
               <th scope="col"></th>
               <th scope="col">Formule</th>
@@ -36,10 +26,8 @@
               <th scope="col">Quantité</th>
             </tr>
           </thead>
-          <tbody >
-            <tr class="insertion">
-
-            </tr>
+          <tbody>
+            <!--<tr class="insertion"></tr>-->
             <tr>
               <td colspan="4" class="text-center">Total HT</td>
               <td id="HT"></td>
@@ -52,18 +40,18 @@
               <td colspan="4" class="text-center">Total TTC:</td>
               <td id="TTC"></td>
             </tr>
-            <tr>
+            <!--<tr>
               <td colspan="5" class="text-center">
                 <button onclick="additionner()" class="btn btn-primary">
                   Calculer le montant de la commande
                 </button>
               </td>
-            </tr>
+            </tr>-->
             <tr>
               <td colspan="5" class="text-center">
-                <a href="#" class="btn btn-success" onclick="sauvegarderEtRediriger()">
-                  Validez et payez vos achats
-                </a>
+                <button class="btn btn-success">
+                   Effectuer le paiement
+                </button>
               </td>
             </tr>
           </tbody>
@@ -72,3 +60,5 @@
     </div>
   </div>
 </section>
+
+
