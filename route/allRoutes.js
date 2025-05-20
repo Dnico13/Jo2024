@@ -10,6 +10,7 @@ export const allRoutes = [
     new Route("/panier", "Visualiser son panier", "Pages/panier.html", "js/panier.js"),
     new Route("/recapitulatifCommande", "Voici le recapitulatif de votre commande", "Pages/recapitulatif.html", "js/recapitulatif.js"),
     new Route("/tests", "tests sur affichage offres", "Pages/tests.html", "js/tests.js"),
+    new Route("/paiement", "Réalisez le paiement de votre commande", "Pages/paiement.html", "js/paiement.js"),
    
     
 

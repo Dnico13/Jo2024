@@ -1,8 +1,8 @@
 
 
 
-const panier = JSON.parse(localStorage.getItem("panier")) || [];
-const montants = JSON.parse(localStorage.getItem("montants")) || { HT: 0, TVA: 0, TTC: 0 };
+const panier = JSON.parse(sessionStorage.getItem("panier")) || [];
+const montants = JSON.parse(sessionStorage.getItem("montants")) || { HT: 0, TVA: 0, TTC: 0 };
 
 // Vérifier  si le tableau est prêt
 const checkTableReady = setInterval(() => {
@@ -13,8 +13,8 @@ const checkTableReady = setInterval(() => {
         clearInterval(checkTableReady); // Stop la vérification une fois trouvé
 
         // Récupérer le panier depuis localStorage
-        const panier = JSON.parse(localStorage.getItem("panier")) || [];
-        const montants = JSON.parse(localStorage.getItem("montants")) || { HT: 0, TVA: 0, TTC: 0 };
+        const panier = JSON.parse(sessionStorage.getItem("panier")) || [];
+        const montants = JSON.parse(sessionStorage.getItem("montants")) || { HT: 0, TVA: 0, TTC: 0 };
 
        
 

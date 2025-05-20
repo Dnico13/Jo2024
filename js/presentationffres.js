@@ -1,5 +1,6 @@
 const API_URL = `${window.location.origin}/backend/api/VisuOffres.php`;
-console.log(API_URL);
+const identification = JSON.parse(sessionStorage.getItem("identification"));
+
 
 // --- Récupéreration du  conteneur  ---
 const offresContainer = document.getElementById('offres-container');
@@ -16,7 +17,7 @@ fetch(API_URL)
     // --- Vider le conteneur avant d'ajouter les nouvelles cartes ---
     offresContainer.innerHTML = ''
 
-offres.forEach(offre => {
+  offres.forEach(offre => {
     // Création d'un élément div pour représenter une offre
     const card = document.createElement('div');
    
@@ -49,8 +50,15 @@ offres.forEach(offre => {
 });
   });
 
-  // --- Ajout d'une offre sélectionnée au panier ---
+const localStoragePanier = localStorage.getItem("panier");
 
+
+
+
+  // --- 2eme partie -----***** Ajout d'une offre sélectionnée au panier ---
+
+
+  
 function ajouterAuPanier(offre) {
   const panierBody = document.querySelector(".table tbody");
 
@@ -134,10 +142,10 @@ function sauvegarderEtRediriger() {
     const totalTTC = parseFloat(document.getElementById("TTC").textContent);
 
 
-    // Sauvegarde du panier dans localStorage
-    localStorage.setItem("panier", JSON.stringify(panier));
-    // Ajout des montants dans localStorage
-    localStorage.setItem("montants", JSON.stringify({ HT: totalHT, TVA: tva, TTC: totalTTC }));
+    // Sauvegarde du panier 
+    sessionStorage.setItem("panier", JSON.stringify(panier));
+    // Ajout des montants 
+    sessionStorage.setItem("montants", JSON.stringify({ HT: totalHT, TVA: tva, TTC: totalTTC }));
 
     // Redirection après stockage
     window.location.href = "/recapitulatifCommande";
