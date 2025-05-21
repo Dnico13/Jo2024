@@ -194,7 +194,7 @@ document.getElementById("acceptPaiement").addEventListener("click", function(eve
     } catch (e) {
         console.error("Erreur de parsing du panier depuis sessionStorage. Vérifiez son format initial.", e);
         alert("Erreur de format du panier. Veuillez réessayer.");
-        return; // Arrête l'exécution si le panier est malformé
+        return; 
     }
     
 
@@ -229,8 +229,14 @@ fetch(API_URL_cde, {
             sessionStorage.removeItem("roles");
             sessionStorage.removeItem("identification"); 
 
-            // Redirection vers la page billet.php
-            window.location.href = "/billet.php"; 
+
+            if (data.cle_finale && data.cle_finale.length > 0) {
+                 window.location.href = "/backend/billet.php?cle_finale=" + encodeURIComponent(data.cle_finale[0]);
+            } else {
+                 window.location.href = "/backend/billet.php"; // Rediriger sans clé si aucune n'est disponible
+            }
+
+
             
         } else {
             alert("❌ Échec de la commande : " + data.message);
