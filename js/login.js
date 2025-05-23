@@ -77,27 +77,29 @@ function validateVerificationCode(code) {
         let url = window.location.pathname
         console.log("URL actuelle :", url);
         
-        if ( url === data.redirect) {
-          
-            window.location.href = data.redirect;
-          
-          } else {  
-                 window.location.href = "/presentationOffres";
-                }
+        
 
         if (data.success) {  
             sessionStorage.setItem("identification", true);
             
             alert("✅ Connexion validée !");
+
+/*----------- debut mise en place de la redirection ------------------*/
            // window.location.href = data.redirect;
-           if ( url === data.redirect) {
+           //if ( url === data.redirect) {
           
-            window.location.href = data.redirect;
+            //window.location.href = data.redirect;
           
-          } else {  
-                 window.location.href = "/presentationOffres";
-                }
-            
+          //} else {  
+            //     window.location.href = "/presentationOffres";
+              //  }
+               if (data.redirect === "/backend/Admin.php") {
+          window.location.href = data.redirect;
+        } else  {
+          window.location.href = "/presentationOffres";
+          
+        } 
+/*----------- fin mise en place de la redirection ------------------*/            
         } else {  
             alert("❌ Code invalide ou expiré. Réessayez !");
             
