@@ -26,10 +26,10 @@ document.getElementById("formConnexion").addEventListener("submit", function(eve
     })
     .then(response => response.json()) 
     .then(data => {  
-        console.log("Réponse du serveur :", data); // Vérification des données reçues
+        
         
         if (data.success) {  
-            // Stocker l'ID utilisateur et son rôle uniquement si la connexion est réussie
+            // Stock l'ID utilisateur et son rôle uniquement si la connexion est réussie
             sessionStorage.setItem("id", data.id);
             sessionStorage.setItem("roles", data.roles);
             console.log("✅ ID utilisateur enregistré :", data.id);
@@ -55,13 +55,13 @@ function validateVerificationCode(code) {
     formData.append("verif_code", code);
     formData.append("email", document.getElementById("floatingInput").value);
 
-    // ✅ Récupération des données stockées en session
+    //  Récupération des données stockées en session
     let userId = sessionStorage.getItem("id");
     let userRoles = sessionStorage.getItem("roles");
 
-    console.log("🔍 Vérification avant envoi:");
-    console.log("ID utilisateur récupéré :", userId);
-    console.log("Rôle utilisateur récupéré :", userRoles);
+    
+    
+    
 
     formData.append("id", userId);
     formData.append("roles", userRoles);
@@ -74,21 +74,34 @@ function validateVerificationCode(code) {
     .then(data => {
         console.log("Réponse de la validation du code :", data);
 
+        let url = window.location.pathname
+        console.log("URL actuelle :", url);
+        
+        if ( url === data.redirect) {
+          
+            window.location.href = data.redirect;
+          
+          } else {  
+                 window.location.href = "/presentationOffres";
+                }
+
         if (data.success) {  
             sessionStorage.setItem("identification", true);
             
             alert("✅ Connexion validée !");
-
-            // 🚀 Redirection selon le rôle
-            if (userRoles === "ROLE_ADMIN") {
-                window.location.href = "/backend/Admin.php"; 
-            } else {
-                window.location.href = "/presentationOffres"; 
-            }
+           // window.location.href = data.redirect;
+           if ( url === data.redirect) {
+          
+            window.location.href = data.redirect;
+          
+          } else {  
+                 window.location.href = "/presentationOffres";
+                }
+            
         } else {  
             alert("❌ Code invalide ou expiré. Réessayez !");
             
-            // 🚨 Sécurité : Supprimer ID et rôle si la validation échoue
+            //  Sécurité : Suppression ID et rôle si la validation échoue
             sessionStorage.removeItem("id");
             sessionStorage.removeItem("roles");
         }
@@ -131,6 +144,7 @@ document
       .then((data) => {
         if (data.success) {
           alert("Inscription réussie, vous pouvez desormais vous identifier.");
+          window.location.href = "/login";
         } else {
           alert("Erreur : " + data.message);
         }

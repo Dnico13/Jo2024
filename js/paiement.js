@@ -21,14 +21,13 @@ if (!authentification) {
 
 /* ----------Récuperation du code js de login.js pour l'authentification et de la creation d'un compte modifie au niveau du href---------- */
 
-
 // traitement du formulaire d'authentification
 
 const API_URL = `${window.location.origin}/backend/api/LoginApi.php`;
 console.log(API_URL);
 
+/* autentification avec envoi de mail */
 
- /* autentification avec envoi de mail */
 document.getElementById("formConnexion").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -43,11 +42,11 @@ document.getElementById("formConnexion").addEventListener("submit", function(eve
         
         
         if (data.success) {  
-            
+            // Stock l'ID utilisateur et son rôle uniquement si la connexion est réussie
             sessionStorage.setItem("id", data.id);
             sessionStorage.setItem("roles", data.roles);
-            
-            
+            console.log("✅ ID utilisateur enregistré :", data.id);
+            console.log("✅ Rôle utilisateur enregistré :", data.roles);
 
             let verificationCode = prompt("📩 Un code de vérification a été envoyé à votre email.\nVeuillez entrer le code :"); 
             
@@ -73,7 +72,9 @@ function validateVerificationCode(code) {
     let userId = sessionStorage.getItem("id");
     let userRoles = sessionStorage.getItem("roles");
 
-   
+    
+    
+    
 
     formData.append("id", userId);
     formData.append("roles", userRoles);
@@ -84,18 +85,36 @@ function validateVerificationCode(code) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log("Réponse de la validation du code :", data);
+
+        let url = window.location.pathname
+        console.log("URL actuelle :", url);
         
+        if ( url === data.redirect) {
+          
+            window.location.href = data.redirect;
+          
+          } else {  
+                 window.location.href = "/presentationOffres";
+                }
 
         if (data.success) {  
             sessionStorage.setItem("identification", true);
+            
             alert("✅ Connexion validée !");
-
-                window.location.href = "/paiement"; 
+           // window.location.href = data.redirect;
+           if ( url === data.redirect) {
+          
+            window.location.href = data.redirect;
+          
+          } else {  
+                 window.location.href = "/presentationOffres";
+                }
             
         } else {  
             alert("❌ Code invalide ou expiré. Réessayez !");
             
-            //  Sécurité : Suppression de  ID et rôle si la validation échoue
+            //  Sécurité : Suppression ID et rôle si la validation échoue
             sessionStorage.removeItem("id");
             sessionStorage.removeItem("roles");
         }
@@ -138,6 +157,7 @@ document
       .then((data) => {
         if (data.success) {
           alert("Inscription réussie, vous pouvez desormais vous identifier.");
+          window.location.href = "/login";
         } else {
           alert("Erreur : " + data.message);
         }
@@ -146,6 +166,10 @@ document
         alert("Une erreur est survenue, veuillez réessayer.");
       });
   });
+
+
+
+
 
 /*-------------------- fin de la recuperation du code Js de login.js -----------------------*/
 
@@ -160,7 +184,7 @@ document.getElementById("refusPaiement").addEventListener("click", function() {
 
 /*-------------------alerte sur paiement accepté---------------------------------------------*/
 
-   // alert("Tout est parfait ! 🎉 Votre paiement a bien été validé. Merci pour ta confiance ! Ton commande est en route, et nous avons hâte de te faire plaisir. À très bientôt !");
+   
 /*--------------code pour envoyer en bdd------------------*/   
 
 
