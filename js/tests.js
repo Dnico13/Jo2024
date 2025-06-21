@@ -1,5 +1,4 @@
 const API_URL = `${window.location.origin}/backend/api/VisuOffres.php`;
-const identification = JSON.parse(sessionStorage.getItem("identification"));
 
 
 // --- Récupéreration du  conteneur  ---
@@ -17,7 +16,7 @@ fetch(API_URL)
     // --- Vider le conteneur avant d'ajouter les nouvelles cartes ---
     offresContainer.innerHTML = ''
 
-  offres.forEach(offre => {
+offres.forEach(offre => {
     // Création d'un élément div pour représenter une offre
     const card = document.createElement('div');
    
@@ -50,20 +49,20 @@ fetch(API_URL)
 });
   });
 
-const localStoragePanier = localStorage.getItem("panier");
-
-
-
-
+  
+  
+  
   // --- 2eme partie -----***** Ajout d'une offre sélectionnée au panier ---
+  const localStoragePanier = localStorage.getItem("panier");
+  console.log("Panier dans le localStorage : ", localStoragePanier);
 
-
+const panier = JSON.parse(localStoragePanier);
   
 function ajouterAuPanier(offre) {
   const panierBody = document.querySelector(".table tbody");
 
   // Sélectionner le point d'insertion précis
-  const pointInsertion = document.querySelector(".insertion");
+  if (panier) {  const pointInsertion = document.querySelector(".insertion");
 
   let existant = document.querySelector(`#panier-${offre.nom.replace(/\s+/g, '')}`);
 
@@ -74,10 +73,10 @@ function ajouterAuPanier(offre) {
 
     row.innerHTML = `
       <td></td>
-      <td>${offre.nom}</td>
-      <td>${offre.prix}</td>
+      <td>${panier.nom}</td>
+      <td>${panier.prix}</td>
       <td></td>
-      <td><input id="panier-${offre.nom.replace(/\s+/g, '')}" type="number" min="0" max="10" value="1" aria-label="quantité"/></td>
+      <td><input id="panier-${panier.nom.replace(/\s+/g, '')}" type="number" min="0" max="10" value="1" aria-label="quantité"/></td>
     `;
 
     // Insérer la ligne directement à l’endroit prévu
@@ -85,6 +84,31 @@ function ajouterAuPanier(offre) {
   } else {
     existant.value = parseInt(existant.value) + 1;
   }
+} else {
+
+  const pointInsertion = document.querySelector(".insertion");
+  
+  let existant = document.querySelector(`#panier-${offre.nom.replace(/\s+/g, '')}`);
+  
+  if (!existant) {
+    const row = document.createElement("tr");
+    
+    row.dataset.id = offre.id; 
+    
+    row.innerHTML = `
+    <td></td>
+    <td>${offre.nom}</td>
+    <td>${offre.prix}</td>
+    <td></td>
+    <td><input id="panier-${offre.nom.replace(/\s+/g, '')}" type="number" min="0" max="10" value="1" aria-label="quantité"/></td>
+    `;
+    
+    // Insérer la ligne directement à l’endroit prévu
+    panierBody.insertBefore(row, pointInsertion);
+  } else {
+    existant.value = parseInt(existant.value) + 1;
+  }
+}
 }
 
 
@@ -142,10 +166,10 @@ function sauvegarderEtRediriger() {
     const totalTTC = parseFloat(document.getElementById("TTC").textContent);
 
 
-    // Sauvegarde du panier 
-    sessionStorage.setItem("panier", JSON.stringify(panier));
-    // Ajout des montants 
-    sessionStorage.setItem("montants", JSON.stringify({ HT: totalHT, TVA: tva, TTC: totalTTC }));
+    // Sauvegarde du panier dans localStorage
+    localStorage.setItem("panier", JSON.stringify(panier));
+    // Ajout des montants dans localStorage
+    localStorage.setItem("montants", JSON.stringify({ HT: totalHT, TVA: tva, TTC: totalTTC }));
 
     // Redirection après stockage
     window.location.href = "/recapitulatifCommande";
