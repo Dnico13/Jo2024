@@ -12,6 +12,7 @@ export const allRoutes = [
     new Route("/tests", "tests sur affichage offres", "Pages/tests.html", "js/tests.js"),
     new Route("/paiement", "Réalisez le paiement de votre commande", "Pages/paiement.html", "js/paiement.js"),
    
+   
     
 
 ];
